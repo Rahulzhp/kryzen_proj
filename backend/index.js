@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const env = require("dotenv");
+const { FormDataRoute } = require("./Routes/FormRoutes");
+const { usersRoute } = require("./Routes/UserRoute");
 env.config();
 const connection = require("./Config/Db");
 const bcrypt = require("bcrypt");
@@ -17,6 +19,10 @@ app.use(
 app.get('/', (req, res) => {
     res.send('welcome kryzen');
 });
+
+app.use("/users", usersRoute)
+
+app.use("/crdential", FormDataRoute)
 
 app.listen(port, async () => {
     try {
