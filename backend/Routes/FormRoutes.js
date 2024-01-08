@@ -29,20 +29,22 @@ FormDataRoute.get('/:id', authenticate, async (req, res) => {
 })
 
 FormDataRoute.post('/add', authenticate, upload.array('photos'), async (req, res) => {
+    // console.log(req)
     try {
         const userId = req.body.userId;
         const { name, age, address } = req.body;
-        const photos = req.files.map(file => file.buffer);
+        const photos = req.files.map(file => file.Buffer);
         const newFormData = new FormDataModel({
             userId,
             name,
             age,
             address,
-            photos,
+            photos
         });
         await newFormData.save();
+        console.log("ne", newFormData)
         res.status(201).json({ message: 'Form data submitted successfully' });
-        res.send(newFormData)
+
     } catch (er) {
         res.send(er.message)
     }

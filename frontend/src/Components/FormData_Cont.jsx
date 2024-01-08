@@ -14,6 +14,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf"
+
 import { states } from "country-cities";
 import { cities } from "country-cities";
 import defaultImg from "../Images/defaultImg.jpeg";
@@ -25,6 +28,7 @@ import axios from "axios";
 import GuestUser from "../Images/Guest-user.png"
 
 const FormData_Cont = () => {
+    const pdfref = useRef()
     const toast = useToast();
     const token = "jjb"
     var settings = {
@@ -96,25 +100,13 @@ const FormData_Cont = () => {
         formData.append('userId', "");
 
         for (let i = 0; i < selectedImage.length; i++) {
-            formData.append('photos', selectedImage[i].pic);
+            formData.append('photos', selectedImage[i].pics);
         }
-        // const formData = new FormData();
-        // for (let i = 0; i < selectedImage.length; i++) {
-        //     formData.append(
-        //         "photos",
-        //         selectedImage[i].pic,
-        //         `${selectedImage[i].position}.jpg`
-        //     );
-        // }
-        // formData.append("name", title);
-        // formData.append("age", age);
-        // formData.append("city", finalCity);
-        // formData.append("address", description);
-        // formData.append("userId", "");
+
 
         axios.post(`http://localhost:8080/crdential/add`, formData, {
             headers: {
-                'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTlhZWFiMzcyODY3ZWIxMDJhMjAzMWEiLCJpYXQiOjE3MDQ2NTE0NTMsImV4cCI6MTcwNDY1NTA1M30.2oRPqzEAOuADs7-CmfTObqqkld6D0k06qbHKMe6PENo"
+                'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTlhZWFiMzcyODY3ZWIxMDJhMjAzMWEiLCJpYXQiOjE3MDQ3Mjg3Mzh9.KyGzP9GLgjRqSMOXod6uStmWCwSVb00Tq4S6gp75Dqg"
             }
         })
             .then((res) => {
@@ -141,6 +133,23 @@ const FormData_Cont = () => {
         setSelectedImage(pics);
         setdisplayImage(blob);
     };
+
+    const downloadpdf = () => {
+        const input = pdfref.current;
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4', true);
+            const pdfWidth = pdf.internal.pageSize.getWidth()
+            const pdfHeight = pdf.internal.pageSize.getHeight()
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+            const imgx = (pdfWidth - imgWidth * ratio) / 2;
+            const imgy = 30
+            pdf.addImage(imgData, 'PNG', imgx, imgy, imgWidth * ratio, imgHeight * ratio);
+            pdf.save('formData.pdf')
+        })
+    }
     return (
         <Box padding={"20px"} height={"1000px"}>
             <Flex gap={"50px"}>
@@ -230,7 +239,7 @@ const FormData_Cont = () => {
                     </Button>
                 </Box>
 
-                <Box width={"30%"} margin={"auto"}>
+                <Box width={"30%"} margin={"auto"} ref={pdfref}>
                     <Text textAlign={"left"} fontWeight={"Bold"} fontSize={"18px"}>Images</Text>
                     <Box h={"300px"}>
                         <Slider {...settings}>
@@ -258,6 +267,9 @@ const FormData_Cont = () => {
                         </Flex>
 
                     </Flex>
+                    <Box>
+                        <Button onClick={downloadpdf}>Download Pdf</Button>
+                    </Box>
                 </Box>
 
             </Flex>

@@ -12,6 +12,8 @@
     "axios": "^1.6.5",
     "country-cities": "^1.0.8",
     "framer-motion": "^10.17.9",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
