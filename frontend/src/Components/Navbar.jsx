@@ -23,16 +23,14 @@ const Navbar = () => {
     const navigate = useNavigate();
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
-
     const [name, setName] = useState("")
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const CarToken = (localStorage.getItem("Cartoken"))
-    const CarUser = (localStorage.getItem("userName"))
-    console.log(CarUser)
+    const UserToken = (localStorage.getItem("Usertoken"))
+    const UserName = (localStorage.getItem("Username"))
+
     const handlelogout = () => {
-        localStorage.removeItem('Cartoken');
+        localStorage.removeItem('Usertoken');
         window.location.reload();
     }
     const handlesignup = (e) => {
@@ -132,8 +130,8 @@ const Navbar = () => {
                 .then((res) => {
                     console.log(res)
                     if (res.data.token) {
-                        localStorage.setItem("Cartoken", res.data.token);
-                        localStorage.setItem("userName", res.data.username);
+                        localStorage.setItem("Usertoken", res.data.token);
+                        localStorage.setItem("Username", res.data.username);
                         toast({
                             title: `Welcome ${res.data.username}`,
                             description: "Successfully Logged In",
@@ -164,21 +162,7 @@ const Navbar = () => {
 
     }
 
-    const handlenav = () => {
-        if (CarToken) {
-            navigate("/sell")
-        } else {
-            toast({
-                title: "Error",
-                description: "Please Login First",
-                status: "error",
-                position: "top",
-                duration: 3000,
-                isClosable: true,
-            });
-        }
 
-    }
     const validateEmail = (email) => {
         // Simple email validation using regex
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -195,7 +179,7 @@ const Navbar = () => {
             .then((res) => {
                 console.log(res)
                 if (res.data.token) {
-                    localStorage.setItem("Cartoken", res.data.token);
+                    localStorage.setItem("Usertoken", res.data.token);
 
                     toast({
                         title: `Welcome ${res.data.username}`,
@@ -226,40 +210,32 @@ const Navbar = () => {
                 <nav>
                     <Container maxW={{ md: '100%', lg: '100%' }} pt={{ lg: 2 }}>
                         <Grid templateColumns={{ lg: 'repeat(6, 1fr)' }} gap={1} >
-                            <Box w={{ lg: '100%' }} h={{ lg: '55px' }} >
-                                <Link to="/"><Center><Img w={{ lg: "80%" }} pt={{ lg: 2 }} src="https://www.v3cars.com/images/logo-light.webp" alt="logo" /></Center></Link>
+                            <Box w={{ lg: '100%' }} h={{ lg: '57px' }} >
+                                <Center><Img w={{ lg: "35%" }} pt={{ lg: 1 }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwSmFMnkE4WWXA5KFrGGohFf8JCBRlk9AluQ&usqp=CAU" alt="logo" /></Center>
                             </Box>
                             <Box w={{ lg: '60%' }} h={{ lg: '50px' }} >
-                                <Center><Text fontSize={{}} color={'#4C4C4C'} pt={{ lg: 3 }}> <b>NEW CARS</b></Text></Center>
+                                <Link to="/"><Center><Text fontSize={{}} color={'#4C4C4C'} pt={{ lg: 3 }}> <b>HOME</b></Text></Center></Link>
                             </Box>
-                            <Box w={{ lg: '60%' }} ml={{ lg: '-35%' }} h={{ lg: '55px' }} >
-                                <Center><Text color={'#4C4C4C'} pt={{ lg: 3 }}> <b>USED CARS</b></Text></Center>
+
+                            <Box w={{ lg: '100%' }} ml={{ lg: '-40%' }} h={{ lg: '50px' }} >
+                                <Link to="/form"><Center><Text color={'#4C4C4C'} pt={{ lg: 3 }}> <b>POST & PREVIEW</b></Text></Center></Link>
                             </Box>
-                            <Box w={{ lg: '100%' }} ml={{ lg: '-70%' }} h={{ lg: '50px' }} >
-                                <Link to="/sell"><Center><Text color={'#4C4C4C'} pt={{ lg: 3 }}> <b>REVIEWS & NEWS</b></Text></Center></Link>
-                            </Box>
-                            <Box w={{ lg: '100%' }} h={{ lg: '50px' }} ml={{ lg: '-25%' }} >
+                            <Box w={{ lg: '100%' }} h={{ lg: '50px' }} ml={{ lg: '-5%' }} >
                                 <InputGroup >
                                     <InputLeftElement paddingTop={"9px"} pointerEvents='none' >
                                         <AiOutlineSearch />
                                     </InputLeftElement>
-                                    <Input backgroundColor={"white"} border={'1px solid'} mt={{ lg: 1 }} htmlSize={34} width='auto' placeholder='Find Your Loved One Car' />
+                                    <Input backgroundColor={"white"} border={'1px solid'} mt={{ lg: 1 }} htmlSize={34} width='auto' placeholder='Find Your Loved One' />
                                 </InputGroup>
                             </Box>
-                            <Box w={{ lg: '100%' }} h={{ lg: '50px' }} marginRight={"30px"}>
-                                <Flex gap={9} >
-                                    <Button onClick={handlenav} mt={{ lg: 1 }} colorScheme="yellow" size='md'>
-                                        Car Dealer
+                            <Box w={{ lg: '100%' }} h={{ lg: '50px' }} ml={"155px"}>
+                                {
+                                    UserToken ? <Button onClick={handlelogout} mt={{ lg: 1 }} colorScheme="green" size='md'>
+                                        {UserName}/Logout
+                                    </Button> : <Button onClick={onOpen} mt={{ lg: 1 }} colorScheme="yellow" size='md'>
+                                        Login/Register
                                     </Button>
-                                    {
-                                        CarToken ? <Button onClick={handlelogout} mt={{ lg: 1 }} colorScheme="green" size='md'>
-                                            {CarUser}/Logout
-                                        </Button> : <Button onClick={onOpen} mt={{ lg: 1 }} colorScheme="yellow" size='md'>
-                                            Login/Register
-                                        </Button>
-                                    }
-
-                                </Flex>
+                                }
                             </Box>
                         </Grid>
                     </Container>
@@ -273,13 +249,13 @@ const Navbar = () => {
                     <ModalOverlay />
                     <ModalContent>
                         {
-                            CarUser ? <ModalHeader>Login</ModalHeader> : <ModalHeader>Create Account</ModalHeader>
+                            UserName ? <ModalHeader>Login</ModalHeader> : <ModalHeader>Create Account</ModalHeader>
                         }
 
                         <ModalCloseButton />
                         <ModalBody pb={6}>
                             {
-                                CarUser ? " " : < FormControl isRequired>
+                                UserName ? " " : < FormControl isRequired>
                                     <FormLabel>Name</FormLabel>
                                     <Input ref={initialRef} value={name}
                                         onChange={(e) => setName(e.target.value)} borderRadius={"21px"} placeholder='Enter your Name' />
@@ -300,14 +276,14 @@ const Navbar = () => {
                         </ModalBody>
                         <ModalFooter>
                             {
-                                CarUser ? <Button onClick={handlelogin} colorScheme="teal" mr={3}>
+                                UserName ? <Button onClick={handlelogin} colorScheme="teal" mr={3}>
                                     Login
                                 </Button> : <Button onClick={handlesignup} colorScheme='red' mr={3}>
                                     Signup
                                 </Button>
                             }
                             {
-                                CarUser ? <Button colorScheme="red" onClick={HandleallLogout}>Signup</Button> : <Button onClick={onClose}>Cancel</Button>
+                                UserToken ? <Button colorScheme="red" onClick={HandleallLogout}>Signup</Button> : <Button onClick={onClose}>Cancel</Button>
                             }
 
 

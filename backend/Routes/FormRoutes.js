@@ -7,10 +7,9 @@ const FormDataRoute = express.Router();
 // const upload = multer({ storage });
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/Product");
+        cb(null, "uploads/product");
     },
     filename: async (req, file, cb) => {
-        // const id = req.postId.toString();
         const filename = `${Date.now()}_${file.originalname}`;
         cb(null, filename);
     },
