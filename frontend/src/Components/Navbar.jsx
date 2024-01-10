@@ -30,6 +30,7 @@ const Navbar = () => {
     const UserName = (localStorage.getItem("Username"))
 
     const handlelogout = () => {
+        localStorage.removeItem('UserUsername');
         localStorage.removeItem('Usertoken');
         window.location.reload();
     }
@@ -61,7 +62,7 @@ const Navbar = () => {
                     email,
                     password,
                 };
-                axios.post('http://localhost:8080/users/register', user)
+                axios.post('https://elegant-crow-smock.cyclic.app/users/register', user)
                     .then((res) => {
                         if (res.data === 'Signup Successfully') {
                             toast({
@@ -126,7 +127,7 @@ const Navbar = () => {
                 email,
                 password,
             };
-            axios.post("http://localhost:8080/users/login", user)
+            axios.post("https://elegant-crow-smock.cyclic.app/users/login", user)
                 .then((res) => {
                     console.log(res)
                     if (res.data.token) {
@@ -175,7 +176,7 @@ const Navbar = () => {
             email,
             password,
         };
-        axios.post("http://localhost:8080/users/login", user)
+        axios.post("https://elegant-crow-smock.cyclic.app/users/login", user)
             .then((res) => {
                 console.log(res)
                 if (res.data.token) {
@@ -214,11 +215,11 @@ const Navbar = () => {
                                 <Center><Img w={{ lg: "35%" }} pt={{ lg: 1 }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwSmFMnkE4WWXA5KFrGGohFf8JCBRlk9AluQ&usqp=CAU" alt="logo" /></Center>
                             </Box>
                             <Box w={{ lg: '60%' }} h={{ lg: '50px' }} >
-                                <Link to="/"><Center><Text fontSize={{}} color={'#4C4C4C'} pt={{ lg: 3 }}> <b>HOME</b></Text></Center></Link>
+                                <Link to="/"><Center><Text fontSize={{}} color={'black'} pt={{ lg: 3 }}> <b>HOME</b></Text></Center></Link>
                             </Box>
 
                             <Box w={{ lg: '100%' }} ml={{ lg: '-40%' }} h={{ lg: '50px' }} >
-                                <Link to="/form"><Center><Text color={'#4C4C4C'} pt={{ lg: 3 }}> <b>POST & PREVIEW</b></Text></Center></Link>
+                                <Link to="/form"><Center><Text color={'black'} pt={{ lg: 3 }}> <b>POST & PREVIEW</b></Text></Center></Link>
                             </Box>
                             <Box w={{ lg: '100%' }} h={{ lg: '50px' }} ml={{ lg: '-5%' }} >
                                 <InputGroup >

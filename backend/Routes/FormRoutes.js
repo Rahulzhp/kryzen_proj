@@ -16,16 +16,40 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-FormDataRoute.get('/:id', authenticate, async (req, res) => {
+FormDataRoute.get('/', async (req, res) => {
     try {
-        const userId = req.params.id;
-        console.log(userId)
         const formData = await FormDataModel.find();
         res.send(formData)
     } catch (er) {
         res.send(er.message)
     }
 })
+FormDataRoute.get("/single/:id", async (req, res) => {
+    const ids = req.params.id;
+    const data = await FormDataModel.findOne({ _id: ids });
+    const parentDirectory = path.join(__dirname, "..");
+    const imagesDirectory = path.join(parentDirectory, "uploads/product");
+    console.log(imagesDirectory);
+    fs.readdir(imagesDirectory, async (err, files) => {
+        if (err) {
+            return res.status(500).json({ msg: "Failed to read images directory" });
+        }
+        const filteredImages = files.filter((file) => file.includes(ids));
+        const imagesData = [];
+        filteredImages.forEach((imageName) => {
+            const imagePath = path.join(imagesDirectory, imageName);
+            const imageData = fs.readFileSync(imagePath);
+            imagesData.push({
+                name: imageName,
+                data: `data:image/jpeg;base64,${imageData.toString("base64")}`,
+            });
+        });
+        res.status(200).send({
+            data: data,
+            images: imagesData,
+        });
+    });
+});
 
 FormDataRoute.post('/add', authenticate, upload.array('photos'), async (req, res) => {
     // console.log(req)

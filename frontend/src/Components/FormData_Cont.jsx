@@ -72,7 +72,7 @@ const FormData_Cont = () => {
         for (let i = 0; i < selectedImage.length; i++) {
             formData.append('photos', selectedImage[i].pics);
         }
-        axios.post(`http://localhost:8080/crdential/add`, formData, {
+        axios.post(`https://elegant-crow-smock.cyclic.app/form/add`, formData, {
             headers: {
                 'Authorization': UserToken
             }
