@@ -166,7 +166,7 @@ const Navbar = () => {
 
 
     const validateEmail = (email) => {
-        // Simple email validation using regex
+
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
     }
@@ -285,7 +285,7 @@ const Navbar = () => {
                                 </Button>
                             }
                             {
-                                UserToken ? <Button colorScheme="red" onClick={HandleallLogout}>Signup</Button> : <Button onClick={onClose}>Cancel</Button>
+                                UserName ? <Button colorScheme="red" onClick={HandleallLogout}>Signup</Button> : <Button onClick={onClose}>Cancel</Button>
                             }
 
 

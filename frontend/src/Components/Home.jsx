@@ -17,7 +17,7 @@ const Home = () => {
           </Box>
           <Box display={"flex"} justifyContent={"space-around"} alignItems={"center"} margin={"auto"} gap={"5px"} marginTop={"35px"}>
             <Text fontSize={"19px"} fontWeight={"semibold"}>Post & Preview Your Data</Text>
-            <Link to="/form"><Button colorScheme={"yellow"}>Preview page</Button></Link>
+            <Link to="/preivew"><Button colorScheme={"yellow"}>Preview page</Button></Link>
           </Box>
         </Box>
       </Box>
