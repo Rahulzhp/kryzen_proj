@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Flex, Grid, Icon, Image, Input, Select, SimpleGrid, Text, Textarea } from '@chakra-ui/react';
+import { Box, Icon, Image, Input } from '@chakra-ui/react';
 import { MdClose } from "react-icons/md";
 import defaultImg from "../Images/defaultImg.jpeg";
 
@@ -25,7 +25,7 @@ const Imagecart = ({ handleImageUpload, pos, displayImage, handleDeleteImage }) 
                     />
                     <Box
                         hidden={
-                            displayImage[pos] == defaultImg
+                            displayImage[pos] === defaultImg
                                 ? true
                                 : false
                         }

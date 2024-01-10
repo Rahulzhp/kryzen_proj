@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, FormControl, FormLabel, Center, Container, Grid, Text, Input, Img, InputGroup, InputLeftElement, Flex, Button, useToast } from '@chakra-ui/react'
+import { Box, FormControl, FormLabel, Center, Container, Grid, Text, Input, Img, InputGroup, InputLeftElement, Button, useToast } from '@chakra-ui/react'
 import {
     Modal,
     ModalOverlay,
@@ -141,6 +141,7 @@ const Navbar = () => {
                             duration: 3000,
                             isClosable: true,
                         });
+                        navigate("/")
                     } else {
                         toast({
                             title: "Error",
@@ -190,7 +191,7 @@ const Navbar = () => {
                         duration: 3000,
                         isClosable: true,
                     });
-                    navigate("/")
+
                 } else {
                     toast({
                         title: "Error",
@@ -219,7 +220,7 @@ const Navbar = () => {
                             </Box>
 
                             <Box w={{ lg: '100%' }} ml={{ lg: '-40%' }} h={{ lg: '50px' }} >
-                                <Link to="/form"><Center><Text color={'black'} pt={{ lg: 3 }}> <b>POST & PREVIEW</b></Text></Center></Link>
+                                <Link to="/preivew"><Center><Text color={'black'} pt={{ lg: 3 }}> <b>POST & PREVIEW</b></Text></Center></Link>
                             </Box>
                             <Box w={{ lg: '100%' }} h={{ lg: '50px' }} ml={{ lg: '-5%' }} >
                                 <InputGroup >

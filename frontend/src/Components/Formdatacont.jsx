@@ -2,17 +2,16 @@ import {
     Box,
     Button,
     Flex,
-    Grid,
-    Icon,
+
     Image,
     Input,
-    Select,
+
     SimpleGrid,
     Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf"
@@ -25,7 +24,7 @@ import axios from "axios";
 import Login from "./Login";
 
 
-const FormData_Cont = () => {
+const Formdatacont = () => {
     const pdfref = useRef()
     const toast = useToast();
     const UserToken = (localStorage.getItem("Usertoken"))
@@ -44,7 +43,7 @@ const FormData_Cont = () => {
     const [selectedImage, setSelectedImage] = useState([]);
     const [name, setname] = useState("");
     const [address, setaddress] = useState("");
-    const user = "rahul"
+
     const handleImageUpload = (event, pos) => {
         let pics = selectedImage;
         let blob = [...displayImage];
@@ -207,4 +206,4 @@ const FormData_Cont = () => {
     )
 }
 
-export default FormData_Cont
+export default Formdatacont
