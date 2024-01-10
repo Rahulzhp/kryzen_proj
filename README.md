@@ -5,7 +5,7 @@
 ![kryzen project](https://github.com/Rahulzhp/kryzen_proj/assets/107567053/54d7d04b-c8ce-4333-b1f3-981107ef6c57)
 
 
-Deployed Link - https://frontend-7s7j86dgw-rahulzhp.vercel.app/
+Deployed Link - https://frontend-p4sww1ui3-rahulzhp.vercel.app/
 
 
 
