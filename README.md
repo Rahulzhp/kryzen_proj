@@ -5,7 +5,7 @@
 ![kryzen project](https://github.com/Rahulzhp/kryzen_proj/assets/107567053/54d7d04b-c8ce-4333-b1f3-981107ef6c57)
 
 
-Deployed Link - https://654dc2eccb1e5c30a5914030--inspiring-elf-2d757e.netlify.app/
+Deployed Link - https://659e58453534a3b397deb48d--astonishing-starship-15581f.netlify.app/
 
 
 
